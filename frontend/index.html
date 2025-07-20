@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    
+    <!-- Favicon: A simple, clean icon for the browser tab, inspired by Apple's minimalist approach. -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='80' text-anchor='middle' dominant-baseline='central'%3E🤖%3C/text%3E%3C/svg%3E" />
+    
+    <!-- Viewport meta tag for responsive design across all devices (mobile, tablet, desktop). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Basic SEO Meta Tags (Good practice even for internal apps) -->
+    <meta name="description" content="AI Call Receptionist Dashboard - Manage and monitor Telegram bot conversations in real-time." />
+    <meta name="keywords" content="AI, Receptionist, Telegram, Bot, Dashboard, React, Spring Boot" />
+    <meta name="author" content="Your Name/Organization" />
+
+    <!-- Open Graph / Facebook Meta Tags (for potential sharing or internal tools) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://localhost:3000/" /> <!-- Update with actual deployment URL -->
+    <meta property="og:title" content="AI Receptionist Dashboard" />
+    <meta property="og:description" content="Manage and monitor Telegram bot conversations in real-time." />
+    <!-- <meta property="og:image" content="http://localhost:3000/path/to/screenshot.png" /> --> <!-- Add a screenshot if available -->
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="http://localhost:3000/" /> <!-- Update with actual deployment URL -->
+    <meta property="twitter:title" content="AI Receptionist Dashboard" />
+    <meta property="twitter:description" content="Manage and monitor Telegram bot conversations in real-time." />
+    <!-- <meta property="twitter:image" content="http://localhost:3000/path/to/screenshot.png" /> -->
+
+    <!-- Theme Color for Mobile Browsers (Apple-like light theme) -->
+    <meta name="theme-color" content="#f2f2f7" /> <!-- Matches the light background color -->
+
+    <!-- Apple-specific meta tags for iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="AI Receptionist" />
+    <!-- <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png" /> --> <!-- Recommended for iOS home screen icon -->
+
+    <!-- Title of the application, clear and concise. -->
+    <title>AI Receptionist Dashboard</title>
+
+    <!-- Preconnect to Google Fonts for Inter, if you decide to use it.
+         Alternatively, relying on system fonts (-apple-system) is more aligned with Apple's native feel.
+         For this example, we'll rely on system fonts defined in globals.css.
+         Added preconnect for potential future use or faster CSS loading if fonts were external.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+
+    <!-- Link to the global CSS file. This file will contain the base styles,
+         color variables, font definitions, and the overall light theme aesthetic,
+         including the foundation for "glass" effects on elements. -->
+    <link rel="stylesheet" href="/src/styles/globals.css" />
+</head>
+<body>
+    <!-- A loading indicator or splash screen that can be hidden by JavaScript once the React app loads.
+         This provides a better user experience by showing something immediately. -->
+    <div id="loading-spinner" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f2f2f7; color: #8e8e93; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        Loading AI Receptionist...
+    </div>
+
+    <!-- The root element where the React application will be mounted. -->
+    <div id="root" style="display: none;"></div>
+    
+    <!-- The main JavaScript file for the React application.
+         Vite automatically injects and bundles your React code here. -->
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Script to hide the loading spinner and show the React app once it's rendered -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const rootElement = document.getElementById('root');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            // Observe when the React app's content is added to the #root element
+            const observer = new MutationObserver((mutationsList, observer) => {
+                if (rootElement.children.length > 0) {
+                    // React app has rendered content, hide spinner and show app
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = 'none';
+                    }
+                    rootElement.style.display = 'flex'; // Or 'block', depending on your root layout
+                    observer.disconnect(); // Stop observing once done
+                }
+            });
+
+            observer.observe(rootElement, { childList: true });
+        });
+    </script>
+
+    <!-- Noscript tag for users with JavaScript disabled.
+         Provides a basic message indicating that the application requires JavaScript. -->
+    <noscript>
+        <div style="text-align: center; padding: 20px; color: #ff3b30; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+            Please enable JavaScript to run this application.
+        </div>
+    </noscript>
+</body>
+</html>
