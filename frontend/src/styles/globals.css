@@ -1,0 +1,320 @@
+/* globals.css - Enhanced for Apple Light Theme & Futuristic Aesthetics */
+
+@import './variables.css'; /* Import the shared variables */
+
+/* Base body styles */
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background-app);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+  min-height: 100vh; /* Ensure body takes full viewport height */
+  display: flex; /* Use flex to manage app-container height */
+  flex-direction: column;
+}
+
+/* General app container layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allow app-container to fill available height */
+  position: relative; /* For marquee footer positioning */
+  /* Optional: Add a subtle glass effect to the whole app container background */
+  /* background-color: rgba(255, 255, 255, 0.6); */
+  /* backdrop-filter: blur(5px); */
+  /* -webkit-backdrop-filter: blur(5px); */
+}
+
+/* Header styles */
+.app-header {
+  background-color: var(--color-background-card);
+  border-bottom: 1px solid var(--color-border-default);
+  padding: var(--spacing-md) var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure header is on top */
+  transition: var(--transition-ease);
+}
+
+.app-header h1 {
+  margin: 0;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-2xl);
+  letter-spacing: -0.02em; /* Tighter letter spacing for Apple feel */
+}
+
+/* Main content area (sidebar + chat) */
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
+  max-width: 1440px; /* Slightly wider max width */
+  margin: var(--spacing-md) auto; /* Center content with top/bottom margin */
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+/* Sidebar styles */
+.sidebar {
+  flex: 0 0 320px; /* Fixed width sidebar on desktop */
+  background-color: var(--color-background-card);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg); /* More pronounced shadow for depth */
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  transition: var(--transition-ease); /* For responsive hiding/showing */
+}
+
+.sidebar-title {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xl);
+  border-bottom: 1px solid var(--color-border-default);
+  padding-bottom: var(--spacing-sm);
+  letter-spacing: -0.01em;
+}
+
+.conversation-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: var(--spacing-sm); /* For scrollbar space */
+}
+
+/* Chat area styles */
+.chat-area {
+  flex-grow: 1;
+  background-color: var(--color-background-card);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg); /* More pronounced shadow */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* For scrolling chat messages */
+}
+
+.no-conversation-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--color-gray-500);
+  font-size: var(--font-size-lg);
+  text-align: center;
+  padding: var(--spacing-xl);
+  user-select: none; /* Prevent selection */
+}
+
+/* Loading Spinner */
+#loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  background-color: var(--color-background-app);
+  color: var(--color-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  transition: opacity 0.5s ease-out; /* Smooth fade out */
+}
+
+#loading-spinner::after {
+  content: '';
+  width: 48px; /* Slightly larger spinner */
+  height: 48px;
+  border: 5px solid var(--color-primary);
+  border-top: 5px solid transparent;
+  border-radius: var(--border-radius-full);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Noscript styling */
+noscript {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffebeb; /* Lighter red background */
+  color: var(--color-accent-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-xl);
+  z-index: 3000;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Hamburger Menu Icon (hidden by default on desktop) */
+.hamburger-menu {
+  display: none; /* Hidden on desktop */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 32px; /* Slightly larger for easier tap */
+  height: 28px;
+  cursor: pointer;
+  z-index: 1100; /* Above other content */
+  padding: var(--spacing-xs); /* Add padding for larger touch target */
+  box-sizing: content-box;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-text-primary);
+  border-radius: 2px;
+  transition: var(--transition-ease);
+}
+
+.hamburger-menu.open span:nth-child(1) {
+  transform: translateY(12px) rotate(45deg); /* Adjusted for new height */
+}
+
+.hamburger-menu.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open span:nth-child(3) {
+  transform: translateY(-12px) rotate(-45deg); /* Adjusted for new height */
+}
+
+/* Marquee Footer */
+.marquee-footer {
+  background-color: var(--color-background-card);
+  border-top: 1px solid var(--color-border-default);
+  padding: var(--spacing-sm) 0;
+  box-shadow: 0 -2px 8px var(--shadow-md);
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 900; /* Below main content */
+  flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%; /* Start off-screen */
+  animation: marquee-scroll 45s linear infinite; /* Slower, more subtle scroll */
+  color: var(--color-gray-500);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.01em;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .main-content {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: var(--spacing-md);
+  }
+
+  .app-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .hamburger-menu {
+    display: flex; /* Show hamburger on mobile */
+  }
+
+  .main-content {
+    flex-direction: column;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    margin: 0; /* Remove side margins on mobile */
+  }
+
+  .sidebar {
+    flex: 0 0 auto; /* Auto height on mobile */
+    width: 100%;
+    padding: var(--spacing-md);
+    position: fixed; /* Overlay for mobile */
+    top: 0;
+    left: -100%; /* Off-screen by default */
+    height: 100vh;
+    z-index: 1050;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg); /* Stronger shadow for overlay */
+    background-color: var(--color-background-card); /* Ensure background for overlay */
+  }
+
+  .sidebar.open {
+    left: 0; /* Slide in */
+  }
+
+  .chat-area {
+    width: 100%;
+    /* Adjust height for header and footer on mobile.
+       (Header height + footer height + padding/margins) */
+    height: calc(100vh - (2 * var(--spacing-md) + var(--font-size-2xl) + 1px + 2 * var(--spacing-sm) + 2px));
+    margin-top: 0; /* Remove top margin if sidebar is overlay */
+  }
+
+  .marquee-footer {
+    padding: var(--spacing-xs) 0;
+  }
+
+  .marquee-content {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Additional smaller mobile adjustments */
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .main-content {
+    padding: var(--spacing-xs);
+    gap: var(--spacing-xs);
+  }
+
+  .sidebar {
+    padding: var(--spacing-sm);
+  }
+
+  .chat-area {
+    height: calc(100vh - 100px); /* Slightly more aggressive height adjustment for very small screens */
+  }
+}
