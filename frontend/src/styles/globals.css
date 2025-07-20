@@ -207,6 +207,60 @@ noscript {
   transform: translateY(-12px) rotate(-45deg); /* Adjusted for new height */
 }
 
+/* Sidebar Backdrop (for mobile overlay) */
+.sidebar-backdrop {
+  position: fixed; /* Fixed to cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+  z-index: 1040; /* Below sidebar (1050) but above main content */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade in/out */
+  backdrop-filter: blur(2px); /* Subtle blur for futuristic feel */
+  -webkit-backdrop-filter: blur(2px);
+}
+
+
+/* Styling for the new close button container in the sidebar */
+.sidebar-close-button-container {
+    display: none; /* Hidden by default on desktop */
+    justify-content: flex-end; /* Push button to the right */
+    padding-bottom: var(--spacing-md); /* Space below the button */
+    border-bottom: 1px solid var(--color-border-default); /* Separator */
+    margin-bottom: var(--spacing-md); /* Space below separator */
+    position: relative;
+    right: 2px; /* Move the button 2px to the left */
+}
+
+/* Style for the close button itself */
+.sidebar-close-button-container button {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    background: var(--color-background-card);
+    border: none;
+    border-radius: var(--border-radius-full);
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: 
+        background 0.25s cubic-bezier(0.4,0,0.2,1),
+        color 0.25s cubic-bezier(0.4,0,0.2,1),
+        transform 0.18s cubic-bezier(0.4,0,0.2,1),
+        box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 1px 4px var(--shadow-sm);
+    outline: none;
+}
+
+.sidebar-close-button-container button:hover,
+.sidebar-close-button-container button:focus {
+    background: var(--color-primary);
+    color: #fff;
+    transform: scale(1.08) rotate(-8deg);
+    box-shadow: 0 4px 16px var(--shadow-md);
+}
+
 /* Marquee Footer */
 .marquee-footer {
   background-color: var(--color-background-card);
@@ -235,6 +289,100 @@ noscript {
   100% { transform: translateX(-100%); }
 }
 
+/* Glassmorphism card style */
+.system-status-card.glassmorphism {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 24px;
+  border: 1.5px solid rgba(255,255,255,0.28);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.status-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+  color: #222;
+  text-align: center;
+}
+
+.status-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  transition: background 0.2s;
+  min-height: 44px;
+  gap: 0.7rem;
+}
+
+.status-label {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #444;
+  flex: 2 1 0;
+  min-width: 120px;
+}
+
+.status-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 0.7rem;
+  box-shadow: 0 0 8px rgba(0,0,0,0.08);
+  border: 2px solid #fff;
+  transition: background 0.3s, box-shadow 0.3s;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.online {
+  background: linear-gradient(135deg, #4cd964 60%, #34c759 100%);
+  box-shadow: 0 0 8px #4cd96455;
+}
+
+.status-dot.offline {
+  background: linear-gradient(135deg, #ff3b30 60%, #ff453a 100%);
+  box-shadow: 0 0 8px #ff3b3055;
+}
+
+.status-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #928484;
+  min-width: 60px;
+  text-align: right;
+  flex: 1 1 0;
+}
+
+.status-value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #007aff;
+  margin-left: 0.7rem;
+  min-width: 32px;
+  text-align: right;
+  flex: 1 1 0;
+}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 992px) {
@@ -282,6 +430,11 @@ noscript {
     left: 0; /* Slide in */
   }
 
+  /* Show the close button container on mobile when sidebar is open */
+  .sidebar.open .sidebar-close-button-container {
+    display: flex; /* Make the container visible */
+  }
+
   .chat-area {
     width: 100%;
     /* Adjust height for header and footer on mobile.
@@ -317,4 +470,36 @@ noscript {
   .chat-area {
     height: calc(100vh - 100px); /* Slightly more aggressive height adjustment for very small screens */
   }
+}
+
+body.dark-mode {
+  --color-background-app: #181a20;
+  --color-background-card: #23272f;
+  --color-text-primary: #f5f6fa;
+  --color-border-default: #23272f;
+  --color-primary: #4cd964;
+  --color-gray-500: #b0b3b8;
+  --color-accent-red: #ff453a;
+  --shadow-md: rgba(0,0,0,0.25);
+  --shadow-lg: rgba(0,0,0,0.35);
+  /* Add/override more variables as needed */
+  background-color: var(--color-background-app);
+  color: var(--color-text-primary);
+}
+
+body.dark-mode .system-status-card.glassmorphism {
+  background: rgba(35, 39, 47, 0.48);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.28);
+  border: 1.5px solid rgba(60,60,60,0.28);
+}
+
+body.dark-mode .status-item {
+  background: rgba(35,39,47,0.32);
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .chat-area,
+body.dark-mode .marquee-footer {
+  background-color: var(--color-background-card);
+  color: var(--color-text-primary);
 }

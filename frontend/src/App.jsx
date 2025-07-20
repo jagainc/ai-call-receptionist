@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ChatWindow from './components/ChatWindow.jsx';
 import ConversationCard from './components/ConversationCard.jsx';
 import SystemStatus from './components/SystemStatus.jsx';
-// import AppleStyleButton from './components/AppleStyleButton.jsx'; // Removed: AppleStyleButton is used within ChatWindow.jsx, not directly in App.jsx
-// import MarqueeText from './components/MarqueeText.jsx'; // MarqueeText is defined inline below
+import AppleStyleButton from './components/AppleStyleButton.jsx'; // Uncommented: AppleStyleButton is now used directly in App.jsx
+// import MarqueeText from './components/MarqueeText.jsx'; // This line is commented out as MarqueeText is defined inline below
 import useWebSocket from './hooks/useWebSocket.js'; // Custom WebSocket hook
 import './styles/globals.css'; // Ensure global styles are imported
+import ThemeToggle from './components/ThemeToggle.jsx';
 
 // Placeholder for a unique user ID for the current admin session.
 // In a real application, this would come from an authentication system.
@@ -16,6 +17,10 @@ function App() {
   const [activeConversationId, setActiveConversationId] = useState(null);
   const [systemStatus, setSystemStatus] = useState({ botOnline: false, llmOnline: false, activeUsers: 0 });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for hamburger menu/sidebar
+  const [isDark, setIsDark] = useState(() => {
+    // Persist theme in localStorage
+    return localStorage.getItem("theme") === "dark";
+  });
 
   // WebSocket connection for real-time updates from the Spring Boot backend
   // Connects to the STOMP endpoint defined in WebSocketConfig
@@ -77,6 +82,11 @@ function App() {
     }
   }, [lastMessage]); // Dependency array: re-run when lastMessage changes
 
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }, [isDark]);
+
   // Function to handle admin sending a message to a Telegram user
   const handleAdminIntervention = (conversationId, messageText) => {
     if (sendMessage && readyState === WebSocket.OPEN) {
@@ -107,7 +117,8 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>AI Receptionist Dashboard</h1>
+        <h1>AI Call Receptionist</h1>
+        <ThemeToggle isDark={isDark} onToggle={() => setIsDark((d) => !d)} />
         {/* Hamburger menu icon, visible on mobile */}
         <div className={`hamburger-menu ${isSidebarOpen ? 'open' : ''}`} onClick={toggleSidebar}>
           <span></span>
@@ -117,8 +128,23 @@ function App() {
       </header>
 
       <div className="main-content">
+        {/* Sidebar Backdrop: Appears when sidebar is open on mobile, closes sidebar on click */}
+        {isSidebarOpen && (
+          <div className="sidebar-backdrop" onClick={toggleSidebar}></div>
+        )}
+
         {/* Sidebar for conversation list and system status */}
         <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+          {/* Close button for mobile sidebar, visible only when open */}
+          <div className="sidebar-close-button-container">
+            <AppleStyleButton
+              onClick={toggleSidebar}
+              text="Close"
+              type="default" // Glass theme
+              ariaLabel="Close sidebar menu"
+            />
+          </div>
+
           <SystemStatus status={systemStatus} />
           <h2 className="sidebar-title">Conversations</h2>
           <div className="conversation-list">
@@ -163,8 +189,7 @@ function App() {
 
 export default App;
 
-// MarqueeText component (can be in its own file: components/MarqueeText.jsx)
-// For simplicity, included here as it's small and tightly coupled to this specific feature.
+// MarqueeText component (defined inline as per your project structure)
 function MarqueeText() {
   const [currentMessage, setCurrentMessage] = useState('');
 
