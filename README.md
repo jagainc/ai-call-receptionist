@@ -1,6 +1,6 @@
 # 🤖 AI Call Assistant
 
-![GitHub repo size](https://img.shields.io/github/repo-size/jagainc/ai-call-assistant?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/jagainc/ai-call-receptionist?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jagainc/ai-call-assistant?style=flat-square)
 ![GitHub stars](https://img.shields.io/github/stars/jagainc/ai-call-assistant?style=flat-square)
 ![GitHub forks](https://img.shields.io/github/forks/jagainc/ai-call-assistant?style=flat-square)
