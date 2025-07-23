@@ -1,9 +1,9 @@
 # 🤖 AI Call Assistant
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/jagainc/ai-call-receptionist?style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/jagainc/ai-call-assistant?style=flat-square)
-![GitHub stars](https://img.shields.io/github/stars/jagainc/ai-call-assistant?style=flat-square)
-![GitHub forks](https://img.shields.io/github/forks/jagainc/ai-call-assistant?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/jagainc/ai-call-receptionist?style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/jagainc/ai-call-receptionist?style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/jagainc/ai-call-receptionist?style=flat-square)
 
 An intelligent **AI-powered call receptionist** built using **Java Spring Boot** and a modern **React + Vite frontend**, designed to automatically handle customer calls, assist with FAQs, and direct calls to appropriate departments — boosting productivity and reducing manual workload.
 
