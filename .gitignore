@@ -1,50 +1,255 @@
-# Root level gitignore for AI Call Receptionist project
+# AI Call Receptionist - Comprehensive .gitignore
 
-# Frontend (React Native Expo)
+# ===================================
+# DEPENDENCIES & NODE_MODULES
+# ===================================
+node_modules/
 frontend/node_modules/
-frontend/.expo/
-frontend/dist/
-frontend/web-build/
-frontend/.env*
-frontend/*.log
-frontend/.DS_Store
-frontend/android/
-frontend/ios/
-
-# Backend (when added)
 backend/node_modules/
-backend/.env*
-backend/dist/
-backend/build/
-backend/*.log
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS generated files
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# Logs
-*.log
+*/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
+yarn.lock
 
-# Environment variables
+# ===================================
+# EXPO & REACT NATIVE
+# ===================================
+frontend/.expo/
+frontend/dist/
+frontend/web-build/
+frontend/android/
+frontend/ios/
+frontend/.expo-shared/
+.expo/
+.expo-shared/
+
+# ===================================
+# TEST FILES & DEVELOPMENT TOOLS
+# ===================================
+# Test files we created for development
+frontend/test_*.js
+backend/test_*.py
+**/test_*.js
+**/test_*.py
+**/test_*.ts
+**/test_*.tsx
+
+# Testing directories
+__tests__/
+tests/
+test/
+*.test.js
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.ts
+*.spec.tsx
+
+# Coverage reports
+coverage/
+.nyc_output/
+*.lcov
+
+# ===================================
+# PERSONAL DATABASE & USER DATA
+# ===================================
+# AsyncStorage database files (contains personal user data)
+*.db
+*.sqlite
+*.sqlite3
+app_data.db
+users.db
+
+# User data directories
+.ai_call_receptionist/
+~/.ai_call_receptionist/
+
+# ===================================
+# ENVIRONMENT & CONFIG FILES
+# ===================================
 .env
+.env.*
+!.env.example
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Temporary files
+# Config files with sensitive data
+config.json
+secrets.json
+credentials.json
+
+# ===================================
+# BUILD & DISTRIBUTION
+# ===================================
+build/
+dist/
+out/
+.next/
+.nuxt/
+.vuepress/dist/
+
+# ===================================
+# LOGS & DEBUG FILES
+# ===================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ===================================
+# IDE & EDITOR FILES
+# ===================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+.metadata/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.un~
+
+# ===================================
+# OS GENERATED FILES
+# ===================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Windows
+*.lnk
+
+# Linux
+*~
+
+# ===================================
+# PYTHON BACKEND SPECIFIC
+# ===================================
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/*.so
+backend/.Python
+backend/env/
+backend/venv/
+backend/ENV/
+backend/env.bak/
+backend/venv.bak/
+backend/.pytest_cache/
+backend/htmlcov/
+backend/.coverage
+backend/.coverage.*
+backend/coverage.xml
+backend/*.cover
+backend/.hypothesis/
+
+# ===================================
+# DOCUMENTATION & SUMMARY FILES
+# ===================================
+# Development documentation (keep main README)
+*_SUMMARY.md
+*_FIX.md
+*_COMPARISON.md
+IMPLEMENTATION_SUMMARY.md
+NETWORK_FREE_AUTH_SUMMARY.md
+PROFILE_DISPLAY_FIX.md
+PROFILE_DATA_FETCH_SUMMARY.md
+DATABASE_COMPARISON.md
+DEPENDENCY_FIX_SUMMARY.md
+
+# ===================================
+# TEMPORARY & CACHE FILES
+# ===================================
 *.tmp
 *.temp
 *.bak
 *.backup
 *.old
+*.orig
+*.rej
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# ===================================
+# SECURITY & SENSITIVE FILES
+# ===================================
+# SSH keys
+*.pem
+*.key
+*.crt
+*.cert
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+
+# API keys and secrets
+.secrets
+secrets/
+private/
+
+# ===================================
+# MISC DEVELOPMENT FILES
+# ===================================
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Local development scripts
+start_local.py
+run_local.sh
+dev_*.sh
+dev_*.py
+
+# ===================================
+# KIRO SPECS (DEVELOPMENT ONLY)
+# ===================================
+.kiro/specs/
+.kiro/
+
+# ===================================
+# KEEP THESE IMPORTANT FILES
+# ===================================
+# These files should NOT be ignored:
+!README.md
+!LICENSE
+!.env.example
+!.gitignore
+!package.json
+!requirements.txt

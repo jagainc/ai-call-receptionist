@@ -21,6 +21,7 @@ frontend/
 
 ## Features
 
+- 🔐 **Authentication** - Login/Register with email and social auth options
 - 🏠 **Automation Hub** - Central dashboard for quick actions
 - 📞 **Call Management** - Advanced call history with search and filtering
 - 📅 **Appointment Scheduling** - Calendar integration for bookings
@@ -91,6 +92,7 @@ This project uses:
 ## Project Status
 
 ### Implemented ✅
+- Authentication flow with login/register screens
 - Home screen with dashboard and quick actions
 - Calls screen with search, filtering, and realistic data
 - Navigation system with tab and stack routing
@@ -98,6 +100,7 @@ This project uses:
 - Glass morphism UI effects
 
 ### In Progress 🔄
+- Authentication API integration (currently using mock)
 - Schedule calls functionality
 - Book appointment feature
 - Agent customization

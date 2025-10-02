@@ -1,4 +1,6 @@
+export { default as BlurText } from './BlurText';
 export { Collapsible } from './Collapsible';
+export { default as DarkVeil } from './DarkVeil';
 export { ExternalLink } from './ExternalLink';
 export { IconSymbol } from './IconSymbol';
 export { default as ParallaxScrollView } from './ParallaxScrollView';

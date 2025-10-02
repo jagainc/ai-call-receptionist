@@ -1,82 +1,126 @@
-# AI Call Receptionist
+# 🤖 AI Call Receptionist
 
-An intelligent call automation and scheduling system built with React Native and Expo.
+A React Native mobile application that serves as your personal AI-powered call receptionist. Manage calls, schedule appointments, organize contacts, and let AI handle your communications intelligently.
 
-## Project Structure
+## ✨ Features
+
+- 🔐 **Secure Local Authentication** - Privacy-first user accounts with local data storage
+- 📞 **Smart Call Management** - Schedule and organize calls with AI assistance
+- 📅 **Appointment Scheduling** - Integrated calendar for managing your schedule
+- 👥 **Contact Organization** - Manage contacts with roles, notes, and tags
+- 🤖 **AI Agent Customization** - Personalize your AI assistant's behavior
+- 📱 **Offline-First** - Works completely offline with local data storage
+- 🎨 **Beautiful UI** - Modern, responsive design with dark/light themes
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI
+- iOS Simulator or Android Emulator (or physical device)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/ai-call-receptionist.git
+   cd ai-call-receptionist
+   ```
+
+2. **Install frontend dependencies**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npx expo start
+   ```
+
+4. **Run on your device**
+   - Scan the QR code with Expo Go app (iOS/Android)
+   - Or press `i` for iOS simulator, `a` for Android emulator
+
+## 📱 App Structure
 
 ```
 ai-call-receptionist/
-├── frontend/          # React Native Expo app
-│   ├── app/          # Expo Router pages
-│   ├── components/   # Reusable UI components
-│   ├── constants/    # App constants and themes
-│   ├── hooks/        # Custom React hooks
-│   ├── assets/       # Images, fonts, and static assets
-│   └── package.json  # Frontend dependencies
-├── backend/          # Backend API (to be added)
-└── README.md         # This file
+├── frontend/                 # React Native Expo app
+│   ├── app/                 # App screens and navigation
+│   ├── components/          # Reusable UI components
+│   ├── hooks/              # Custom React hooks
+│   ├── constants/          # App constants and themes
+│   └── assets/             # Images, fonts, and static files
+└── backend/                # Optional backend services
+    ├── app/                # FastAPI application
+    └── requirements.txt    # Python dependencies
 ```
 
-## Features
+## 🔐 Privacy & Security
 
-- 🏠 **Automation Hub** - Central dashboard for quick actions
-- 📞 **Call Management** - Advanced call history with search and filtering
-- 📅 **Appointment Scheduling** - Calendar integration for bookings
-- 🤖 **AI Agent Integration** - Voice chat with Kijo assistant
-- 🎨 **Modern UI** - Glass morphism design with light/dark themes
-- 📱 **Cross-platform** - iOS, Android, and Web support
+- **Local-First Architecture**: All user data stays on your device
+- **No Network Dependencies**: Works completely offline
+- **Secure Authentication**: Password hashing with local session management
+- **Privacy by Design**: No data collection or external tracking
 
-## Getting Started
+## 🎨 Screenshots
+
+[Add screenshots of your app here]
+
+## 🛠️ Development
 
 ### Frontend Development
 
 ```bash
 cd frontend
-npm install
-npm start
+npm start                    # Start Expo development server
+npm run android             # Run on Android
+npm run ios                 # Run on iOS
+npm run web                 # Run on web
 ```
 
-### Available Scripts
+### Code Structure
 
+- **Authentication**: Local AsyncStorage-based auth system
+- **Navigation**: Expo Router with type-safe routing
+- **State Management**: React Context API
+- **Styling**: StyleSheet with theme support
+- **Data Storage**: AsyncStorage for local persistence
+
+## 📋 Available Scripts
+
+### Frontend
 - `npm start` - Start the Expo development server
 - `npm run android` - Run on Android device/emulator
 - `npm run ios` - Run on iOS device/simulator
-- `npm run web` - Run in web browser
+- `npm run web` - Run on web browser
 - `npm run lint` - Run ESLint
 
-## Tech Stack
+## 🤝 Contributing
 
-### Frontend
-- **React Native** with Expo
-- **TypeScript** for type safety
-- **Expo Router** for navigation
-- **React Navigation** for advanced routing
-- **Expo Vector Icons** for iconography
-- **React Native Reanimated** for animations
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### Design System
-- Glass morphism UI effects
-- Comprehensive theming (light/dark modes)
-- Haptic feedback integration
-- Platform-specific optimizations
+## 📄 License
 
-## Development
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This project uses:
-- File-based routing with Expo Router
-- TypeScript strict mode
-- ESLint for code quality
-- Custom theming system
-- Modular component architecture
+## 🙏 Acknowledgments
 
-## Contributing
+- Built with [React Native](https://reactnative.dev/) and [Expo](https://expo.dev/)
+- UI components inspired by modern mobile design patterns
+- Icons by [Expo Vector Icons](https://icons.expo.fyi/)
 
-1. Clone the repository
-2. Install dependencies: `cd frontend && npm install`
-3. Start development server: `npm start`
-4. Make your changes
-5. Submit a pull request
+## 📞 Support
 
-## License
+If you have any questions or need help, please open an issue on GitHub.
 
-MIT License - see LICENSE file for details
+---
+
+**Made with ❤️ for better call management**

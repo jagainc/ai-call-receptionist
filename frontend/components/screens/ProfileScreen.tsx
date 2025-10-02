@@ -1,9 +1,11 @@
 import { ThemedText } from '@/components/common/ThemedText';
 import { ThemedView } from '@/components/common/ThemedView';
 import { useAppColors } from '@/hooks/useAppColors';
+import { useAuth } from '@/hooks/useAuth';
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
-import { Alert, Image, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { router } from 'expo-router';
+import { useState, useEffect } from 'react';
+import { Alert, Image, ScrollView, StyleSheet, TouchableOpacity, View, RefreshControl } from 'react-native';
 
 interface ProfileOption {
   id: string;
@@ -13,49 +15,82 @@ interface ProfileOption {
   isDestructive?: boolean;
 }
 
-const profileOptions: ProfileOption[] = [
-  {
-    id: '1',
-    title: 'Edit Profile',
-    icon: 'person-outline',
-    action: () => console.log('Edit Profile pressed'),
-  },
-  {
-    id: '2',
-    title: 'Notifications',
-    icon: 'notifications-outline',
-    action: () => console.log('Notifications pressed'),
-  },
-  {
-    id: '3',
-    title: 'Settings',
-    icon: 'settings-outline',
-    action: () => console.log('Settings pressed'),
-  },
-  {
-    id: '4',
-    title: 'Help & Support',
-    icon: 'help-circle-outline',
-    action: () => console.log('Help pressed'),
-  },
-  {
-    id: '5',
-    title: 'Privacy Policy',
-    icon: 'shield-outline',
-    action: () => console.log('Privacy pressed'),
-  },
-  {
-    id: '6',
-    title: 'Logout',
-    icon: 'log-out-outline',
-    action: () => console.log('Logout pressed'),
-    isDestructive: true,
-  },
-];
-
 export default function ProfileScreen() {
   const { colors, interactive } = useAppColors();
+  const { user, logout, checkAuthStatus } = useAuth();
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Load user's profile picture if they have one
+  useEffect(() => {
+    if (user?.profile_picture_path) {
+      setProfileImage(user.profile_picture_path);
+    }
+  }, [user]);
+
+  // Function to refresh user data
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await checkAuthStatus(); // This will refresh the user data from storage
+    setRefreshing(false);
+  };
+
+  // Define profile options inside component to access logout function
+  const profileOptions: ProfileOption[] = [
+    {
+      id: '1',
+      title: 'Edit Profile',
+      icon: 'person-outline',
+      action: () => console.log('Edit Profile pressed'),
+    },
+    {
+      id: '2',
+      title: 'Notifications',
+      icon: 'notifications-outline',
+      action: () => console.log('Notifications pressed'),
+    },
+    {
+      id: '3',
+      title: 'Settings',
+      icon: 'settings-outline',
+      action: () => console.log('Settings pressed'),
+    },
+    {
+      id: '4',
+      title: 'Help & Support',
+      icon: 'help-circle-outline',
+      action: () => console.log('Help pressed'),
+    },
+    {
+      id: '5',
+      title: 'Privacy Policy',
+      icon: 'shield-outline',
+      action: () => console.log('Privacy pressed'),
+    },
+    {
+      id: '6',
+      title: 'Logout',
+      icon: 'log-out-outline',
+      action: () => {
+        Alert.alert(
+          'Logout',
+          'Are you sure you want to logout?',
+          [
+            { text: 'Cancel', style: 'cancel' },
+            {
+              text: 'Logout',
+              style: 'destructive',
+              onPress: async () => {
+                await logout();
+                router.replace('/auth');
+              }
+            }
+          ]
+        );
+      },
+      isDestructive: true,
+    },
+  ];
 
   const sampleImages = [
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
@@ -83,6 +118,14 @@ export default function ProfileScreen() {
       style={[styles.container, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.scrollContent}
       showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor={colors.tint}
+          colors={[colors.tint]}
+        />
+      }
     >
       <ThemedView style={[styles.header, { backgroundColor: colors.background }]}>
         <TouchableOpacity
@@ -119,11 +162,21 @@ export default function ProfileScreen() {
         </TouchableOpacity>
 
         <ThemedText style={[styles.name, { color: colors.primaryText }]}>
-          John Doe
+          {user?.full_name || 'Guest User'}
         </ThemedText>
         <ThemedText style={[styles.email, { color: colors.secondaryText }]}>
-          john.doe@example.com
+          {user?.email || 'No email'}
         </ThemedText>
+        {user?.phone_number && (
+          <ThemedText style={[styles.phone, { color: colors.secondaryText }]}>
+            {user.phone_number}
+          </ThemedText>
+        )}
+        {user && (
+          <ThemedText style={[styles.memberSince, { color: colors.secondaryText }]}>
+            Member since {new Date().getFullYear()}
+          </ThemedText>
+        )}
       </ThemedView>
 
       <ThemedView
@@ -245,8 +298,19 @@ const styles = StyleSheet.create({
   },
   email: {
     fontSize: 16,
-    marginBottom: 16,
+    marginBottom: 4,
     fontWeight: '500',
+  },
+  phone: {
+    fontSize: 14,
+    marginBottom: 4,
+    fontWeight: '400',
+  },
+  memberSince: {
+    fontSize: 12,
+    marginBottom: 16,
+    fontWeight: '400',
+    opacity: 0.8,
   },
   optionsContainer: {
     marginTop: 20,

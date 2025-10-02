@@ -1,7 +1,7 @@
 import { ThemedText } from '@/components/common/ThemedText';
 import { ThemedView } from '@/components/common/ThemedView';
 import { useAppColors } from '@/hooks/useAppColors';
-import { useColorScheme } from '@/hooks/useColorScheme.web';
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { router } from 'expo-router';
